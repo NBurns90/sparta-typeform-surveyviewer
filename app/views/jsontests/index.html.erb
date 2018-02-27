@@ -1,4 +1,26 @@
 
   <div class="">
-    <%= @jsontests%>
+    <!-- <%= @jsontests %> -->
+    <% @jsontests["questions"].each do | jsontest |%>
+      <%= jsontest["question"] %>
+      <br>
+    <% end %>
+
+  <h1>BREAK</h1>
+
+  <% output = Hash.new %>
+
+  <% @jsontests["responses"].each do | jsontest |%>
+  <h4>Response</h4>
+    <% jsontest["answers"].each do | key, value | %>
+      <% output[key] = value %>
+      <br>
+    <% end %>
+  <h4>Response end</h4>
+  <% end %>
+
+  <% for i in 0..output.length*10 %>
+    <%= output %>
+    <% i+=10 %>
+  <% end %>
   </div>
