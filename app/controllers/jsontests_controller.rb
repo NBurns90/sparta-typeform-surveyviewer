@@ -13,9 +13,8 @@ class JsontestsController < ApplicationController
 
     @jsontests = JSON.parse(json)
      @jsontests["responses"].each do |jsontest|
-       puts jsontest["answers"]["opinionscale_b2FX1apYy6KY"]
+       puts jsontest["answers"]["dropdown_oXn12MMLCWad"] => jsontest["answers"]["opinionscale_b2FX1apYy6KY"].to_i
      end
-
   end
 
   # GET /jsontests/1
