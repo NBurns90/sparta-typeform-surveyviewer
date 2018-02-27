@@ -1,0 +1,17 @@
+<%= form_with(model: jsontest, local: true) do |form| %>
+  <% if jsontest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(jsontest.errors.count, "error") %> prohibited this jsontest from being saved:</h2>
+
+      <ul>
+      <% jsontest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
