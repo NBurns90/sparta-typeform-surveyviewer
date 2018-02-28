@@ -11,6 +11,7 @@ class JsontestsController < ApplicationController
   def index
     json = HTTParty.get("https://api.typeform.com/v1/form/WaIffL?key=f486f2db8f1249c077a08b582bc3efe0a2617668").body
     @jsontests = JSON.parse(json)
+
     @questions = @jsontests["questions"]
     @responses = @jsontests["responses"]
     @mappingHash = @responses.map do |response|
@@ -94,4 +95,5 @@ class JsontestsController < ApplicationController
     def jsontest_params
       params.fetch(:jsontest, {})
     end
+
 end
