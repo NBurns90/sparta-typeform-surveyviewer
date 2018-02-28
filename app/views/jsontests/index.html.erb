@@ -1,7 +1,7 @@
 <h1>Heading</h1>
 
 <% @mappingHash.each do |map| %>
-  <li><%= map %></li>
+  <li><%= map["name"]%><%= map["score"] %></li>
 <% end %>
 
     <h1>BREAK</h1>
@@ -13,5 +13,8 @@
     <% end %>
 
   </div>
-  
-<%= bar_chart @mappingHash.group_by(@mappingHash["name"]).sum(@mappingHash["score"]) %>
+
+
+<h1>Break</h1>
+
+<%= bar_chart ({"Jack" => [1],"Jack" => [1],"Jack" => [1],"Jack" => [7],"Jack" => [5], "Joe" => [7]}) %>

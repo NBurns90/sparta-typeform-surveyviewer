@@ -14,12 +14,18 @@ class JsontestsController < ApplicationController
 
     @questions = @jsontests["questions"]
     @responses = @jsontests["responses"]
+
     @mappingHash = @responses.map do |response|
+      namearr = []
+      scorearr = []
       @trainer = {
         'name' => response["answers"]["dropdown_oXn12MMLCWad"],
         'score' => response["answers"]["opinionscale_b2FX1apYy6KY"].to_i
       }
+      namearr.push['name']
     end
+
+
 
   end
 
