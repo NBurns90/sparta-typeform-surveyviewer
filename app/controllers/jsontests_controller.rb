@@ -15,8 +15,16 @@ class JsontestsController < ApplicationController
     @responses = @jsontests["responses"]
     @mappingHash = @responses.map do |response|
       @trainer = {
-        'name' => response["answers"]["dropdown_oXn12MMLCWad"],
-        'score' => response["answers"]["opinionscale_b2FX1apYy6KY"].to_i
+        'Q_Score' => response["answers"]["opinionscale_b2FX1apYy6KY"].to_i,
+        'Q_Organised'=> response["answers"]["list_YMBzp5MSVXw6_choice"],
+        'Q_Industry'=> response["answers"]["list_O30DQPjBp5vo_choice"],
+        'Q_Examples'=> response["answers"]["list_maGlk0GN5zP0_choice"],
+        'Q_Feedback'=> response["answers"]["list_tXrYhpNCS0pt_choice"],
+        'Q_Contact'=> response["answers"]["list_HK4vmpWmUCqV_choice"],
+        'Q_ClearProjects'=> response["answers"]["list_H5HwuUY7llmz_choice"],
+        'Q_TName' => response["answers"]["dropdown_oXn12MMLCWad"],
+        'Q_feedbacktext'=> response["answers"]["textfield_WfUP6q9XNCMX"],
+        'Q_DrawsAttention'=> response["answers"]["list_Da75t6LS98SA_choice"]
       }
     end
 

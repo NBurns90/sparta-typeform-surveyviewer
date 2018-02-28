@@ -1,7 +1,35 @@
-<h1>Heading</h1>
+<h1>Survery Responses</h1>
 
-<% @mappingHash.each do |map| %>
-  <li><%= map %></li>
-<% end %>
+<div class="container">
 
-<%= scatter_chart [@mappingHash["name"], @mappinghash[:score]], xtitle: "Trainer", ytitle: "NPS" %>
+<table class="table-striped text-center">
+  <thead>
+      <% @questions.each do |map| %>
+      <th data-toggle="tooltip" title="<%= map["question"] %>"><%= map["question"] %></th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @mappingHash.each do |map| %>
+      <tr class="active">
+        <td><%= map["Q_Score"] %></td>
+        <td><%= map["Q_Organised"] %></td>
+        <td><%= map["Q_Industry"] %></td>
+        <td><%= map["Q_Examples"] %></td>
+        <td><%= map["Q_Feedback"] %></td>
+        <td><%= map["Q_Contact"] %></td>
+        <td><%= map["Q_ClearProjects"] %></td>
+        <td><%= map["Q_TName"] %></td>
+        <td data-toggle="tooltip" data-placement="top" title="<%= map["Q_feedbacktext"] %>"><%= map["Q_feedbacktext"] %></td>
+        <td><%= map["Q_DrawsAttention"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<script>
+$(document).ready(function(){
+   $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

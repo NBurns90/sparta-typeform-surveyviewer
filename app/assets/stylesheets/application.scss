@@ -16,3 +16,15 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.container{
+  margin: 0;
+}
+
+td, th {
+ max-width: 120px;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ z-index: 3;
+}
