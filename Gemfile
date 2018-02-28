@@ -24,6 +24,7 @@ gem 'json'
 gem 'pry'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+gem "chartkick"
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

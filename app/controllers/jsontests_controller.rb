@@ -10,11 +10,16 @@ class JsontestsController < ApplicationController
   # GET /jsontests.json
   def index
     json = HTTParty.get("https://api.typeform.com/v1/form/WaIffL?key=f486f2db8f1249c077a08b582bc3efe0a2617668").body
-
     @jsontests = JSON.parse(json)
-     @jsontests["responses"].each do |jsontest|
-       puts jsontest["answers"]["dropdown_oXn12MMLCWad"] => jsontest["answers"]["opinionscale_b2FX1apYy6KY"].to_i
-     end
+    @questions = @jsontests["questions"]
+    @responses = @jsontests["responses"]
+    @mappingHash = @responses.map do |response|
+      @trainer = {
+        'name' => response["answers"]["dropdown_oXn12MMLCWad"],
+        'score' => response["answers"]["opinionscale_b2FX1apYy6KY"].to_i
+      }
+    end
+
   end
 
   # GET /jsontests/1
