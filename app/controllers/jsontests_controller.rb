@@ -12,6 +12,12 @@ class JsontestsController < ApplicationController
     json = HTTParty.get("https://api.typeform.com/v1/form/WaIffL?key=f486f2db8f1249c077a08b582bc3efe0a2617668").body
 
     @jsontests = JSON.parse(json)
+<<<<<<< HEAD
+=======
+     @jsontests["responses"].each do |jsontest|
+       puts jsontest["answers"]["opinionscale_b2FX1apYy6KY"]
+     end
+>>>>>>> dev
 
   end
 
