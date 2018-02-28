@@ -4,4 +4,4 @@
   <li><%= map %></li>
 <% end %>
 
-<%= scatter_chart [@mappingHash["name"], @mappinghash[:score]], xtitle: "Trainer", ytitle: "NPS" %>
+<%= bar_chart @mappingHash.group_by(@mappingHash["name"]).sum(@mappingHash["score"]) %>
