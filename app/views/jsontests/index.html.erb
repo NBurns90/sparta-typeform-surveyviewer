@@ -6,21 +6,12 @@
       <br>
     <% end %>
 
-  <h1>BREAK</h1>
+    <h1>BREAK</h1>
 
-  <% output = Hash.new %>
-
-  <% @jsontests["responses"].each do | jsontest |%>
-  <h4>Response</h4>
-    <% jsontest["answers"].each do | key, value | %>
-      <% output[key] = value %>
+    <% @jsontests["responses"].each do | jsontest | %>
+      <%= jsontest["answers"]["opinionscale_b2FX1apYy6KY"] %>
+      <%= jsontest["answers"]["dropdown_oXn12MMLCWad"] %>
       <br>
     <% end %>
-  <h4>Response end</h4>
-  <% end %>
 
-  <% for i in 0..output.length*10 %>
-    <%= output %>
-    <% i+=10 %>
-  <% end %>
   </div>
