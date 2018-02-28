@@ -1,10 +1,8 @@
+<h1>Heading</h1>
 
-  <div class="">
-    <!-- <%= @jsontests %> -->
-    <% @jsontests["questions"].each do | jsontest |%>
-      <%= jsontest["question"] %>
-      <br>
-    <% end %>
+<% @mappingHash.each do |map| %>
+  <li><%= map %></li>
+<% end %>
 
     <h1>BREAK</h1>
 
@@ -15,3 +13,5 @@
     <% end %>
 
   </div>
+  
+<%= bar_chart @mappingHash.group_by(@mappingHash["name"]).sum(@mappingHash["score"]) %>
