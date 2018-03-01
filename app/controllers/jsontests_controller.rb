@@ -40,6 +40,30 @@ class JsontestsController < ApplicationController
 
     end
 
+    @trainerNPS = @responses.map do |trainer|
+      @NPS = {
+        'Trainer Name' => trainer["answers"]["dropdown_oXn12MMLCWad"],
+        'NPS' => trainer["answers"]["opinionscale_b2FX1apYy6KY"].to_i
+      }
+    end
+    counter = 0
+    npsTotal = 0
+    @trainerNPS.each do |i|
+      if i['Trainer Name'] == "Joe Childs"
+        counter += 1
+        if i['NPS'] <= 6
+          npsTotal -= 1
+        elsif i['NPS'] <=8
+          npsTotal += 0
+        else i['NPS'] > 8
+          npsTotal += 1
+        end
+        @NPSScore = (npsTotal/counter.to_f) * 100
+      end
+    end
+    puts @NPSScore
+    puts counter
+
   end
 
   # GET /jsontests/1
