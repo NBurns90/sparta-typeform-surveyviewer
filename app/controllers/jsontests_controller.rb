@@ -12,9 +12,17 @@ class JsontestsController < ApplicationController
     json = HTTParty.get("https://api.typeform.com/v1/form/WaIffL?key=f486f2db8f1249c077a08b582bc3efe0a2617668").body
     @jsontests = JSON.parse(json)
 
-
+    ids = []
+    @trainers = []
     @questions = @jsontests["questions"]
     @responses = @jsontests["responses"]
+    @questions.each do |question|
+       ids.push(question["id"])
+    end
+    @responses.each do |response|
+      @trainers.push(response["answers"]["dropdown_oXn12MMLCWad"])
+      @trainers = @trainers.uniq
+    end
 
     @mappingHash = @responses.map do |response|
       @trainer = {
@@ -29,7 +37,7 @@ class JsontestsController < ApplicationController
         'Q_feedbacktext'=> response["answers"]["textfield_WfUP6q9XNCMX"],
         'Q_DrawsAttention'=> response["answers"]["list_Da75t6LS98SA_choice"]
       }
-    
+
     end
 
   end

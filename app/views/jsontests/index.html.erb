@@ -3,9 +3,9 @@
 <div class="filter">
   <form>
     <p>Select Trainer: </p>
-   <select name="trainer">
-   <% @mappingHash.each_with_index do |map| %>
-    <option value="<%= map["Q_TName"] %>"><%= map["Q_TName"] %>
+   <select name="curr_trainer">
+   <% @trainers.each do |trainer| %>
+    <option value="<%= trainer %>"><%= trainer %>
    <%end%>
    </select>
   </form>
@@ -24,7 +24,7 @@
    <% @mappingHash.each_with_index do |map| %>
      <tr class="active">
 
-       <% if map["Q_TName"] == "Joe Childs" %>
+       <% if map["Q_TName"] == @trainers[0] %>
 
          <td><%= map["Q_Score"] %></td>
          <td><%= map["Q_Organised"] %></td>
@@ -34,7 +34,9 @@
          <td><%= map["Q_Contact"] %></td>
          <td><%= map["Q_ClearProjects"] %></td>
          <td><%= map["Q_TName"] %></td>
-         <span> <td data-toggle="tooltip" data-placement="right" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %></td>
+        <td>
+          <span data-toggle="tooltip" data-placement="right" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %>
+        </td>
          <td><%= map["Q_DrawsAttention"] %></td>
        <% end %>
 
