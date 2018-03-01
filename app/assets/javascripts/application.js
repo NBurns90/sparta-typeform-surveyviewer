@@ -17,3 +17,18 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+
+    $( "select" )
+      .change(function () {
+        var trainer = "";
+        $( "select option:selected" ).each(function() {
+          trainer += $( this ).text() + " ";
+        });
+        $( "#Blah" ).text( trainer );
+      })
+      .change();
+
+
+});
