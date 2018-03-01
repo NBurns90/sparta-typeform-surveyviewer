@@ -1,35 +1,52 @@
-<h1>Survery Responses</h1>
+<h1>Survey Responses</h1>
+
+<div class="filter">
+  <form>
+    <p>Select Trainer: </p>
+   <select name="trainer">
+   <% @mappingHash.each_with_index do |map| %>
+    <option value="<%= map["Q_TName"] %>"><%= map["Q_TName"] %>
+   <%end%>
+   </select>
+  </form>
+
+</div>
 
 <div class="container">
 
 <table class="table-striped text-center">
-  <thead>
-      <% @questions.each do |map| %>
-       <th data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>"> <%= map["question"] %> </th>
-    <% end %>
-  </thead>
-  <tbody>
-    <% @mappingHash.each_with_index do |map| %>
-      <tr class="active">
-        <td><%= map["Q_Score"] %></td>
-        <td><%= map["Q_Organised"] %></td>
-        <td><%= map["Q_Industry"] %></td>
-        <td><%= map["Q_Examples"] %></td>
-        <td><%= map["Q_Feedback"] %></td>
-        <td><%= map["Q_Contact"] %></td>
-        <td><%= map["Q_ClearProjects"] %></td>
-        <td><%= map["Q_TName"] %></td>
-        <span> <td data-toggle="tooltip" data-placement="right" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %></td>
-        <td><%= map["Q_DrawsAttention"] %></td>
-      </tr>
-    <% end %>
-  </tbody>
+ <thead>
+     <% @questions.each do |map| %>
+      <th> <span data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>"><%= map["question"] %></span></th>
+   <% end %>
+ </thead>
+ <tbody>
+   <% @mappingHash.each_with_index do |map| %>
+     <tr class="active">
+
+       <% if map["Q_TName"] == "Joe Childs" %>
+
+         <td><%= map["Q_Score"] %></td>
+         <td><%= map["Q_Organised"] %></td>
+         <td><%= map["Q_Industry"] %></td>
+         <td><%= map["Q_Examples"] %></td>
+         <td><%= map["Q_Feedback"] %></td>
+         <td><%= map["Q_Contact"] %></td>
+         <td><%= map["Q_ClearProjects"] %></td>
+         <td><%= map["Q_TName"] %></td>
+         <span> <td data-toggle="tooltip" data-placement="right" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %></td>
+         <td><%= map["Q_DrawsAttention"] %></td>
+       <% end %>
+
+     </tr>
+   <% end %>
+ </tbody>
 </table>
 </div>
 
 
 <script>
 $(document).ready(function(){
-   $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip();
 });
 </script>

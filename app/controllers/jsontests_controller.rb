@@ -13,10 +13,6 @@ class JsontestsController < ApplicationController
     @jsontests = JSON.parse(json)
 
 
-    # h["incidents"].map {|h1| h1['number'] if h1['key']=='xyz098'}.compact.first
-
-    # @mappingHash.select { |responses| responses.dropdown_oXn12MMLCWad.answers == "Jack McGregor" }
-
     @questions = @jsontests["questions"]
     @responses = @jsontests["responses"]
 
@@ -33,7 +29,7 @@ class JsontestsController < ApplicationController
         'Q_feedbacktext'=> response["answers"]["textfield_WfUP6q9XNCMX"],
         'Q_DrawsAttention'=> response["answers"]["list_Da75t6LS98SA_choice"]
       }
-      # @jsontests["answers"].map {|h1| h1[response["answers"]["opinionscale_b2FX1apYy6KY"]] if h1[response["answers"]["dropdown_oXn12MMLCWad"]]=='Jack McGregor'}.compact.first
+    
     end
 
   end
