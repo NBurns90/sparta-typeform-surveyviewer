@@ -5,11 +5,11 @@
 <table class="table-striped text-center">
   <thead>
       <% @questions.each do |map| %>
-      <th data-toggle="tooltip" title="<%= map["question"] %>"><%= map["question"] %></th>
+       <th data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>"> <%= map["question"] %> </th>
     <% end %>
   </thead>
   <tbody>
-    <% @mappingHash.each do |map| %>
+    <% @mappingHash.each_with_index do |map| %>
       <tr class="active">
         <td><%= map["Q_Score"] %></td>
         <td><%= map["Q_Organised"] %></td>
@@ -19,7 +19,7 @@
         <td><%= map["Q_Contact"] %></td>
         <td><%= map["Q_ClearProjects"] %></td>
         <td><%= map["Q_TName"] %></td>
-        <td data-toggle="tooltip" data-placement="top" title="<%= map["Q_feedbacktext"] %>"><%= map["Q_feedbacktext"] %></td>
+        <span> <td data-toggle="tooltip" data-placement="right" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %></td>
         <td><%= map["Q_DrawsAttention"] %></td>
       </tr>
     <% end %>
