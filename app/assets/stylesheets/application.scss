@@ -17,14 +17,63 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body{
+  background-color: white;
+}
+
+h1{
+  font-size: 40px;
+  color: #00191C;
+}
+
+h2{
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .container{
-  margin: 0;
+  margin-left: 2%;
+}
+
+.filter{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.filter p{
+  font-size: 20px;
+}
+
+td{
+  padding: 10px;
+  margin: 5px;
 }
 
 td, th {
- max-width: 120px;
+ max-width: 130px;
  overflow: hidden;
  text-overflow: ellipsis;
  white-space: nowrap;
- z-index: 3;
+ font-size: 15px;
+}
+
+img{
+  width: 50px;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+  padding: 15px;
+  background: #00191C;
+}
+
+.good{
+  background-color: #00552C;
+}
+
+.medium{
+  background-color: #007494;
+}
+
+.bad{
+  background-color: #B80043;
 }

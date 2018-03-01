@@ -1,6 +1,9 @@
-<h1>Survey Responses</h1>
+<%= render 'partials/nav' %>
 
-<div class="filter">
+<div class="container">
+<h1 class="text-center">Survey Responses</h1>
+<div class="row">
+<div class="filter col-md-6">
   <form>
     <p>Select Trainer: </p>
    <select name="curr_trainer">
@@ -15,8 +18,12 @@
 
 </div>
 
+<div class="filter col-md-6">
+  <h2>Trainer Score:<%=@NPSScore %></h2>
 
-<div class="container">
+</div>
+</div>
+
 
 <table class="table-striped text-center">
  <thead>
@@ -30,7 +37,14 @@
 
        <% if map["Q_TName"] == @trainers[0] %>
 
-         <td><%= map["Q_Score"] %></td>
+       <% if (map["Q_Score"] >= 8) %>
+         <td class="good"><%= map["Q_Score"] %></td>
+       <% elsif (map["Q_Score"] < 8 && map["Q_Score"] >= 5 ) %>
+         <td class="medium"><%= map["Q_Score"] %></td>
+       <% else (map["Q_Score"] < 5) %>
+         <td class="bad"><%= map["Q_Score"] %></td>
+        <% end %>
+
          <td><%= map["Q_Organised"] %></td>
          <td><%= map["Q_Industry"] %></td>
          <td><%= map["Q_Examples"] %></td>
@@ -39,7 +53,7 @@
          <td><%= map["Q_ClearProjects"] %></td>
          <td><%= map["Q_TName"] %></td>
         <td>
-          <span data-toggle="tooltip" data-placement="right" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %>
+          <span data-toggle="tooltip" data-placement="top" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %>
         </td>
          <td><%= map["Q_DrawsAttention"] %></td>
        <% end %>
