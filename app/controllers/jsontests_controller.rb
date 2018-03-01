@@ -55,7 +55,7 @@ class JsontestsController < ApplicationController
           npsTotal -= 1
         elsif i['NPS'] <=8
           npsTotal += 0
-        else i['NPS'] > 8
+        else
           npsTotal += 1
         end
         @NPSScore = (npsTotal/counter.to_f) * 100

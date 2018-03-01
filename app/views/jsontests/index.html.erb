@@ -28,10 +28,6 @@
    <% @mappingHash.each_with_index do |map| %>
      <tr class="active">
 
-       <% if map["Q_TName"] == page["Blah"] %>
-         <h1>It works</h1>
-       <% end %>
-
        <% if map["Q_TName"] == @trainers[0] %>
 
          <td><%= map["Q_Score"] %></td>
