@@ -11,26 +11,28 @@ class JsontestsController < ApplicationController
   def index
       @filter = params[:trainer]
       puts @filter
-      json = HTTParty.get("https://api.typeform.com/v1/form/WaIffL?key=f486f2db8f1249c077a08b582bc3efe0a2617668").body
+      json = HTTParty.get("https://api.typeform.com/v1/form/xworhI?key=5183fd4e5b96b0571cf4d256f5707318a2e019bf").body
       @jsontests = JSON.parse(json)
-      ids = []
+      @ids = []
       @trainers = []
       @questions = @jsontests["questions"]
       @responses = @jsontests["responses"]
       @questions.each do |question|
-         ids.push(question["id"])
+         @ids.push(question["id"])
       end
       @responses.each do |response|
-        if response["answers"]["dropdown_oXn12MMLCWad"]!= ""
-          @trainers.push(response["answers"]["dropdown_oXn12MMLCWad"])
+        if response["answers"]["dropdown_30910541"]!= ""
+          @trainers.push(response["answers"]["dropdown_30910541"])
         end
         @trainers = @trainers.uniq
       end
+      puts @trainers
+      binding.pry
       @mappingHash = @responses.map do |response|
-        @trainer = {
-          'Q_Score' => response["answers"]["opinionscale_b2FX1apYy6KY"].to_i,
-          'Q_Organised'=> response["answers"]["list_YMBzp5MSVXw6_choice"],
-          'Q_Industry'=> response["answers"]["list_O30DQPjBp5vo_choice"],
+        @table_hash = {
+          'Q_Score' => response["answers"]["opinionscale_30901532"].to_i,
+          'Q_Organised'=> response["answers"]["yesno_30901533"],
+          'Q_Industry'=> response["answers"]["yesno_30901534"],
           'Q_Examples'=> response["answers"]["list_maGlk0GN5zP0_choice"],
           'Q_Feedback'=> response["answers"]["list_tXrYhpNCS0pt_choice"],
           'Q_Contact'=> response["answers"]["list_HK4vmpWmUCqV_choice"],
@@ -42,7 +44,7 @@ class JsontestsController < ApplicationController
       end
       @trainerNPS = @responses.map do |trainer|
         @NPS = {
-          'Trainer Name' => trainer["answers"]["dropdown_oXn12MMLCWad"],
+          'Trainer Name' => trainer["answers"]["dropdown_30910541"],
           'NPS' => trainer["answers"]["opinionscale_b2FX1apYy6KY"].to_i
         }
       end
