@@ -20,15 +20,9 @@
 
 $(document).ready(function(){
 
-    $( "select" )
-      .change(function () {
-        var trainer = "";
-        $( "select option:selected" ).each(function() {
-          trainer += $( this ).text() + " ";
-        });
-        $( "#Blah" ).text( trainer );
-      })
-      .change();
+    $( "select" ).change(function () {
+      $("#search_form").submit()
+    });
 
 
 });

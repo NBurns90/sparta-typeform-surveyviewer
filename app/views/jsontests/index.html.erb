@@ -6,7 +6,9 @@
 <div class="filter col-md-6">
   <form id="search_form" action="/" method="get">
     <p>Select Trainer: </p>
-   <select name="trainer" onchange="document.getElementById('search_form').submit">
+
+   <select name="trainer">
+     <option value="">Select Trainer</option>
    <% @trainers.each do |trainer| %>
     <option value="<%= trainer %>"><%= trainer %>
    <%end%>
@@ -22,7 +24,9 @@
 
  <h2>NPS Score:</h2>
   <% for i in 0..@trainers.length-2 %>
-    <h3><%= @trainers[i] %> = <%= @NPSScore[i] %></h3>
+    <% if @trainers[i] == @filter || @filter == "" || !@filter %>
+      <h3><%= @trainers[i] %> = <%= @NPSScore[i] %></h3>
+    <% end %>
   <% end %>
 
 </div>
@@ -39,7 +43,7 @@
    <% @mappingHash.each_with_index do |map| %>
      <tr class="active">
 
-       <% if map["Q_TName"] == @trainers[0] %>
+       <% if map["Q_TName"] == @filter || @filter == "" || !@filter %>
 
        <% if (map["Q_Score"] >= 8) %>
          <td class="good"><%= map["Q_Score"] %></td>
