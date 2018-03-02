@@ -32,7 +32,8 @@ h2{
 }
 
 .container{
-  margin-left: 2%;
+  margin-left: 20%;
+
 }
 
 .filter{
@@ -50,11 +51,11 @@ td{
 }
 
 td, th {
- max-width: 130px;
+ max-width: 300px;
  overflow: hidden;
  text-overflow: ellipsis;
  white-space: nowrap;
- font-size: 15px;
+ font-size: 20px;
 }
 
 img{
@@ -67,13 +68,16 @@ img{
 }
 
 .good{
-  background-color: #00552C;
+  background-color: rgba(86, 191, 34, 0.65);
+
 }
 
 .medium{
-  background-color: #007494;
+  background-color: rgba(219, 121, 51, 0.85);
+
 }
 
 .bad{
-  background-color: #B80043;
+  background-color: rgba(191, 34, 34, 0.56);
+
 }

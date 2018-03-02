@@ -4,9 +4,9 @@
 <h1 class="text-center">Survey Responses</h1>
 <div class="row">
 <div class="filter col-md-6">
-  <form>
+  <form id="search_form" action="/" method="get">
     <p>Select Trainer: </p>
-   <select name="curr_trainer">
+   <select name="trainer" onchange="document.getElementById('search_form').submit">
    <% @trainers.each do |trainer| %>
     <option value="<%= trainer %>"><%= trainer %>
    <%end%>
@@ -19,7 +19,11 @@
 </div>
 
 <div class="filter col-md-6">
-  <h2>Trainer Score:<%=@NPSScore %></h2>
+
+ <h2>NPS Score:</h2>
+  <% for i in 0..@trainers.length-2 %>
+    <h3><%= @trainers[i] %> = <%= @NPSScore[i] %></h3>
+  <% end %>
 
 </div>
 </div>
@@ -27,8 +31,8 @@
 
 <table class="table-striped text-center">
  <thead>
-     <% @questions.each do |map| %>
-      <th> <span data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>"><%= map["question"] %></span></th>
+     <% @questions.each_with_index do |map,index| %>
+      <th> <span data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>">Q<%= index %></span></th>
    <% end %>
  </thead>
  <tbody>
@@ -52,14 +56,14 @@
          <td><%= map["Q_Contact"] %></td>
          <td><%= map["Q_ClearProjects"] %></td>
          <td><%= map["Q_TName"] %></td>
-        <td>
-          <span data-toggle="tooltip" data-placement="top" title="<%= map["Q_feedbacktext"] %>"></span><%= map["Q_feedbacktext"] %>
+        <td style="min-width:130px">
+          <span data-toggle="tooltip" data-placement="top" title="<%= map['Q_feedbacktext'] %>">More information...</span>
         </td>
          <td><%= map["Q_DrawsAttention"] %></td>
        <% end %>
-
+<% end %>
      </tr>
-   <% end %>
+
  </tbody>
 </table>
 </div>
