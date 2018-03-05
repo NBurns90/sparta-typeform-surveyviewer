@@ -27,14 +27,14 @@
 <div class="filter col-md-10 col-md-offset-2 pull-right">
 
   <table class="table-striped text-center">
-   <thead>
+   <thead >
        <% @questions.each_with_index do |map,index| %>
-        <th> <span data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>">Q<%= index+1 %></span></th>
+        <th class="text-center"> <span data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>">Q<%= index+1 %></span></th>
      <% end %>
    </thead>
    <tbody>
      <% @mappingHash.each_with_index do |map| %>
-       <tr class="active">
+       <tr class="active text-center">
 
          <% if map["Q_TName"] == @filter || @filter == "" || !@filter %>
 
@@ -52,18 +52,19 @@
            <td><%= map["Q_Comfortable"] ? "Agree" : "Disagree" %></td>
            <td><%= map["Q_Contact"] ? "Agree" : "Disagree" %></td>
            <td><%= map["Q_ClearProjects"] ? "Agree" : "Disagree" %></td>
-           <td><%= map["Q_TName"] ? "Agree" : "Disagree" %></td>
-           <td><%= map["Q_feedbacktext"] %></td>
+           <td><%= map["Q_TName"]%></td>
+           <td>
+             <span data-toggle="tooltip" data-placement="top" title="<%= map['Q_feedbacktext'] %>">More information...</span>
+           </td>
            <td><%= map["Q_DrawsAttention"] ? "Agree" : "Disagree" %></td>
            <td><%= map["Q_Annecdotes"] ? "Agree" : "Disagree" %></td>
            <td><%= map["Q_Complex"] ? "Agree" : "Disagree" %></td>
            <td><%= map["Q_Approach"] ? "Agree" : "Disagree" %></td>
            <td><%= map["Q_Respect"] ? "Agree" : "Disagree" %></td>
-           <td><%= map["Q_AdditionalComments"] %></td>
+           <td >
+             <span data-toggle="tooltip" data-placement="top" title="<%= map['Q_AdditionalComments'] %>">More information...</span>
+           </td>
            <td><%= map["Q_Name"] %></td>
-          <td >
-            <span data-toggle="tooltip" data-placement="top" title="<%= map['Q_feedbacktext'] %>">More information...</span>
-          </td>
            <td><%= map["Q_DrawsAttention"] ? "Agree" : "Disagree" %></td>
          <% end %>
   <% end %>
