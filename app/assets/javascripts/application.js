@@ -21,8 +21,8 @@
 $(document).ready(function(){
 
     $( "select" ).change(function () {
-      $("#search_form").submit()
+      $("#search_form").submit() //customised form allows form filtering
     });
-
+    $('[data-toggle="tooltip"]').tooltip(); //shows non binary answers as tooltops on mouseover
 
 });

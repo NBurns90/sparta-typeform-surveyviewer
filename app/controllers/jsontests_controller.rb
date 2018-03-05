@@ -9,67 +9,63 @@ class JsontestsController < ApplicationController
   # GET /jsontests
   # GET /jsontests.json
   def index
-      @filter = params[:trainer]
-      json = HTTParty.get("https://api.typeform.com/v1/form/xworhI?key=5183fd4e5b96b0571cf4d256f5707318a2e019bf").body
-      @jsontests = JSON.parse(json)
-      @ids = []
-      @trainers = []
-      @questions = @jsontests["questions"]
-      @responses = @jsontests["responses"]
-      @questions.each do |question|
-         @ids.push(question["id"])
+    @filter = params[:trainer] #used for filtering between trainers
+    json = HTTParty.get("https://api.typeform.com/v1/form/xworhI?key=5183fd4e5b96b0571cf4d256f5707318a2e019bf").body
+    @jsontests = JSON.parse(json) #line above is where API Key is entered, this makes it accessible to the app
+    @trainers = []
+    @questions = @jsontests["questions"]
+    @responses = @jsontests["responses"]
+    @responses.each do |response| #fills the trainer array
+      if response["answers"]["dropdown_30910541"]!= ""
+        @trainers.push(response["answers"]["dropdown_30910541"])
       end
-      @responses.each do |response|
-        if response["answers"]["dropdown_30910541"]!= ""
-          @trainers.push(response["answers"]["dropdown_30910541"])
-        end
-        @trainers = @trainers.uniq
-      end
-      @mappingHash = @responses.map do |response|
-        @table_hash = {
-          'Q_Score' => response["answers"]["opinionscale_30901532"].to_i,
-          'Q_Organised'=> response["answers"]["yesno_30901533"],
-          'Q_Industry'=> response["answers"]["yesno_30901534"],
-          'Q_Feedback'=> response["answers"]["yesno_30901535"],
-          'Q_Comfortable'=> response["answers"]["yesno_30901536"],
-          'Q_Contact'=> response["answers"]["yesno_30901537"],
-          'Q_ClearProjects'=> response["answers"]["yesno_30901538"],
-          'Q_TName' => response["answers"]["dropdown_30910541"],
-          'Q_feedbacktext'=> response["answers"]["textarea_30901569"],
-          'Q_DrawsAttention'=> response["answers"]["yesno_30901539"],
-          'Q_Annecdotes'=> response["answers"]["yesno_30901540"],
-          'Q_Complex'=> response["answers"]["yesno_30901541"],
-          'Q_Approach'=> response["answers"]["yesno_30901542"],
-          'Q_Respect'=> response["answers"]["yesno_30901543"],
-          'Q_AdditionalComments'=> response["answers"]["textarea_30907282"],
-          'Q_Name'=> response["answers"]["textfield_30921082"]
-        }
-      end
-      @trainerNPS = @responses.map do |trainer|
-        @NPS = {
-          'Trainer Name' => trainer["answers"]["dropdown_30910541"],
-          'NPS' => trainer["answers"]["opinionscale_30901532"].to_i
-        }
-      end
-      @NPSScore = []
-      @trainers.each do |trainer_name|
-        counter = 0
-        npsTotal = 0
-        @trainerNPS.each do |i|
-          if i['Trainer Name'] == trainer_name
-            counter += 1
-            if i['NPS'] <= 6
-              npsTotal -= 1
-            elsif i['NPS'] <=8
-              npsTotal += 0
-            else
-              npsTotal += 1
-            end
+      @trainers = @trainers.uniq #removes duplicate trainers
+    end
+    @mappingHash = @responses.map do |response| #hash filled with responses using JSON IDs
+      @table_hash = {
+        'Q_Score' => response["answers"]["opinionscale_30901532"].to_i,
+        'Q_Organised'=> response["answers"]["yesno_30901533"],
+        'Q_Industry'=> response["answers"]["yesno_30901534"],
+        'Q_Feedback'=> response["answers"]["yesno_30901535"],
+        'Q_Comfortable'=> response["answers"]["yesno_30901536"],
+        'Q_Contact'=> response["answers"]["yesno_30901537"],
+        'Q_ClearProjects'=> response["answers"]["yesno_30901538"],
+        'Q_TName' => response["answers"]["dropdown_30910541"],
+        'Q_feedbacktext'=> response["answers"]["textarea_30901569"],
+        'Q_DrawsAttention'=> response["answers"]["yesno_30901539"],
+        'Q_Annecdotes'=> response["answers"]["yesno_30901540"],
+        'Q_Complex'=> response["answers"]["yesno_30901541"],
+        'Q_Approach'=> response["answers"]["yesno_30901542"],
+        'Q_Respect'=> response["answers"]["yesno_30901543"],
+        'Q_AdditionalComments'=> response["answers"]["textarea_30907282"],
+        'Q_Name'=> response["answers"]["textfield_30921082"]
+      }
+    end
+    @trainerNPS = @responses.map do |trainer| #Creates hash to store Trainer NPS. Fills with trainer name and blank NPS
+      @NPS = {
+        'Trainer Name' => trainer["answers"]["dropdown_30910541"],
+        'NPS' => trainer["answers"]["opinionscale_30901532"].to_i
+      }
+    end
+    @NPSScore = []
+    @trainers.each do |trainer_name| #Calculates all NPS Scores for the trainers
+      counter = 0
+      npsTotal = 0
+      @trainerNPS.each do |i|
+        if i['Trainer Name'] == trainer_name
+          counter += 1
+          if i['NPS'] <= 6
+            npsTotal -= 1
+          elsif i['NPS'] <=8
+            npsTotal += 0
+          else
+            npsTotal += 1
           end
         end
-        @NPSScore.push(((npsTotal/counter.to_f)* 100).round(2))
       end
+      @NPSScore.push(((npsTotal/counter.to_f)* 100).round(2))
     end
+  end
 
   # GET /jsontests/1
   # GET /jsontests/1.json
