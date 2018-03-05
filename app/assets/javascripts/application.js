@@ -10,6 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require highcharts
+//= require chartkick
+//= require jquery
 //= require rails-ujs
+//= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+
+    $( "select" ).change(function () {
+      $("#search_form").submit() //customised form allows form filtering
+    });
+    $('[data-toggle="tooltip"]').tooltip(); //shows non binary answers as tooltops on mouseover
+
+});
