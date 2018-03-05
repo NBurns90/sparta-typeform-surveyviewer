@@ -31,31 +31,29 @@ h2{
   font-weight: bold;
 }
 
-.container{
-  margin-left: 10%;
-
-}
 
 .filter{
   margin-top: 50px;
   margin-bottom: 50px;
+  margin-left: 10px;
 }
 
 .filter p{
   font-size: 20px;
 }
 
-td{
-  padding: 10px;
-  margin: 5px;
+.affix {
+    top: 20px;
+    z-index: 9999 !important;
 }
 
+
 td, th {
- max-width: 300px;
+ max-width: 100px;
  overflow: hidden;
  text-overflow: ellipsis;
  white-space: nowrap;
- font-size: 20px;
+ font-size: 15px;
 }
 
 img{

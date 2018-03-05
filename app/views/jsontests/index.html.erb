@@ -1,9 +1,8 @@
 <%= render 'partials/nav' %>
 
-<div class="container">
 <h1 class="text-center">Survey Responses</h1>
 <div class="row">
-<div class="filter col-md-6">
+<div class="filter col-md-2"  id="myScrollspy" data-spy="affix"  data-offset-top="205">
   <form id="search_form" action="/" method="get">
     <p>Select Trainer: </p>
 
@@ -15,63 +14,66 @@
    </select>
   </form>
 
-  <div id = "Blah" class="hidden"></div>
-
-
-</div>
-
-<div class="filter col-md-6">
-
- <h2>NPS Score:</h2>
-  <% for i in 0..@trainers.length-2 %>
-    <% if @trainers[i] == @filter || @filter == "" || !@filter %>
-      <h3><%= @trainers[i] %> = <%= @NPSScore[i] %></h3>
-    <% end %>
-  <% end %>
-
-</div>
-</div>
-
-
-<table class="table-striped text-center">
- <thead>
-     <% @questions.each_with_index do |map,index| %>
-      <th> <span data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>">Q<%= index %></span></th>
+  <h2>NPS Score:</h2>
+   <% for i in 0..@trainers.length-2 %>
+     <% if @trainers[i] == @filter || @filter == "" || !@filter %>
+       <h6><%= @trainers[i] %> = <%= @NPSScore[i] %></h6>
+     <% end %>
    <% end %>
- </thead>
- <tbody>
-   <% @mappingHash.each_with_index do |map| %>
-     <tr class="active">
 
-       <% if map["Q_TName"] == @filter || @filter == "" || !@filter %>
+  </div>
 
-       <% if (map["Q_Score"] >= 8) %>
-         <td class="good"><%= map["Q_Score"] %></td>
-       <% elsif (map["Q_Score"] < 8 && map["Q_Score"] >= 5 ) %>
-         <td class="medium"><%= map["Q_Score"] %></td>
-       <% else (map["Q_Score"] < 5) %>
-         <td class="bad"><%= map["Q_Score"] %></td>
-        <% end %>
+  <div class="container-fluid">
+<div class="filter col-md-10">
 
-         <td><%= map["Q_Organised"] %></td>
-         <td><%= map["Q_Industry"] %></td>
-         <td><%= map["Q_Examples"] %></td>
-         <td><%= map["Q_Feedback"] %></td>
-         <td><%= map["Q_Contact"] %></td>
-         <td><%= map["Q_ClearProjects"] %></td>
-         <td><%= map["Q_TName"] %></td>
-        <td style="min-width:130px">
-          <span data-toggle="tooltip" data-placement="top" title="<%= map['Q_feedbacktext'] %>">More information...</span>
-        </td>
-         <td><%= map["Q_DrawsAttention"] %></td>
-       <% end %>
-<% end %>
-     </tr>
+  <table class="table-striped text-center">
+   <thead>
+       <% @questions.each_with_index do |map,index| %>
+        <th> <span data-toggle="tooltip" data-placement="right" title="<%= map["question"] %>">Q<%= index+1 %></span></th>
+     <% end %>
+   </thead>
+   <tbody>
+     <% @mappingHash.each_with_index do |map| %>
+       <tr class="active">
 
- </tbody>
-</table>
+         <% if map["Q_TName"] == @filter || @filter == "" || !@filter %>
+
+         <% if (map["Q_Score"] >= 8) %>
+           <td class="good"><%= map["Q_Score"] %></td>
+         <% elsif (map["Q_Score"] < 8 && map["Q_Score"] >= 5 ) %>
+           <td class="medium"><%= map["Q_Score"] %></td>
+         <% else (map["Q_Score"] < 5) %>
+           <td class="bad"><%= map["Q_Score"] %></td>
+          <% end %>
+
+           <td><%= map["Q_Organised"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Industry"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Feedback"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Comfortable"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Contact"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_ClearProjects"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_TName"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_feedbacktext"] %></td>
+           <td><%= map["Q_DrawsAttention"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Annecdotes"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Complex"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Approach"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_Respect"] ? "Agree" : "Disagree" %></td>
+           <td><%= map["Q_AdditionalComments"] %></td>
+           <td><%= map["Q_Name"] %></td>
+          <td >
+            <span data-toggle="tooltip" data-placement="top" title="<%= map['Q_feedbacktext'] %>">More information...</span>
+          </td>
+           <td><%= map["Q_DrawsAttention"] ? "Agree" : "Disagree" %></td>
+         <% end %>
+  <% end %>
+       </tr>
+
+   </tbody>
+  </table>
+
 </div>
-
+</div>
 
 <script>
 $(document).ready(function(){

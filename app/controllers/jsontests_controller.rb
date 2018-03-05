@@ -10,7 +10,6 @@ class JsontestsController < ApplicationController
   # GET /jsontests.json
   def index
       @filter = params[:trainer]
-      puts @filter
       json = HTTParty.get("https://api.typeform.com/v1/form/xworhI?key=5183fd4e5b96b0571cf4d256f5707318a2e019bf").body
       @jsontests = JSON.parse(json)
       @ids = []
@@ -26,26 +25,30 @@ class JsontestsController < ApplicationController
         end
         @trainers = @trainers.uniq
       end
-      puts @trainers
-      binding.pry
       @mappingHash = @responses.map do |response|
         @table_hash = {
           'Q_Score' => response["answers"]["opinionscale_30901532"].to_i,
           'Q_Organised'=> response["answers"]["yesno_30901533"],
           'Q_Industry'=> response["answers"]["yesno_30901534"],
-          'Q_Examples'=> response["answers"]["list_maGlk0GN5zP0_choice"],
-          'Q_Feedback'=> response["answers"]["list_tXrYhpNCS0pt_choice"],
-          'Q_Contact'=> response["answers"]["list_HK4vmpWmUCqV_choice"],
-          'Q_ClearProjects'=> response["answers"]["list_H5HwuUY7llmz_choice"],
-          'Q_TName' => response["answers"]["dropdown_oXn12MMLCWad"],
-          'Q_feedbacktext'=> response["answers"]["textfield_WfUP6q9XNCMX"],
-          'Q_DrawsAttention'=> response["answers"]["list_Da75t6LS98SA_choice"]
+          'Q_Feedback'=> response["answers"]["yesno_30901535"],
+          'Q_Comfortable'=> response["answers"]["yesno_30901536"],
+          'Q_Contact'=> response["answers"]["yesno_30901537"],
+          'Q_ClearProjects'=> response["answers"]["yesno_30901538"],
+          'Q_TName' => response["answers"]["dropdown_30910541"],
+          'Q_feedbacktext'=> response["answers"]["textarea_30901569"],
+          'Q_DrawsAttention'=> response["answers"]["yesno_30901539"],
+          'Q_Annecdotes'=> response["answers"]["yesno_30901540"],
+          'Q_Complex'=> response["answers"]["yesno_30901541"],
+          'Q_Approach'=> response["answers"]["yesno_30901542"],
+          'Q_Respect'=> response["answers"]["yesno_30901543"],
+          'Q_AdditionalComments'=> response["answers"]["textarea_30907282"],
+          'Q_Name'=> response["answers"]["textfield_30921082"]
         }
       end
       @trainerNPS = @responses.map do |trainer|
         @NPS = {
           'Trainer Name' => trainer["answers"]["dropdown_30910541"],
-          'NPS' => trainer["answers"]["opinionscale_b2FX1apYy6KY"].to_i
+          'NPS' => trainer["answers"]["opinionscale_30901532"].to_i
         }
       end
       @NPSScore = []
@@ -64,7 +67,7 @@ class JsontestsController < ApplicationController
             end
           end
         end
-        @NPSScore.push((npsTotal/counter.to_f)* 100)
+        @NPSScore.push(((npsTotal/counter.to_f)* 100).round(2))
       end
     end
 
